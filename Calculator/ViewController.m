@@ -11,6 +11,7 @@
 @interface ViewController ()
 @property int num1;
 @property int num2;
+@property int oper; // 1 for +, 2 for -, 3 for *, 4 for /
 @property (weak, nonatomic) IBOutlet UITextField *text_result;
 @property (weak, nonatomic) IBOutlet UILabel *testText;
 @property (weak, nonatomic) IBOutlet UIButton *text_num1;
@@ -47,20 +48,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)textBtn:(id)sender {
-    int height_feet = 7;
-    int height_inches = 2;
-    double height_cm = ((height_feet*12) + height_inches) * 2.54;
-    //self.testText.text = [NSString stringWithFormat:@"%f" , height_cm];
-    
-    if(height_cm < 200.00){
-        self.testText.text = @"You are shorter than 2.0 meters";
-    }
-    else {
-        self.testText.text = @"You are taller than 2.0 meters";
-    }
-}
-
 - (IBAction)text_num1:(id)sender {
     if(self.text_result.text==NULL){
         self.text_result.text = @"1";
@@ -91,6 +78,146 @@
         self.text_result.text = [NSString stringWithFormat:@"%d" , num];
     }
 }
+
+- (IBAction)text_num4:(id)sender {
+    if(self.text_result.text==NULL){
+        self.text_result.text = @"4";
+    }
+    else{
+        int num = self.text_result.text.intValue;
+        num = (num * 10) + 4;
+        self.text_result.text = [NSString stringWithFormat:@"%d" , num];
+    }
+}
+- (IBAction)text_num5:(id)sender {
+    if(self.text_result.text==NULL){
+        self.text_result.text = @"5";
+    }
+    else{
+        int num = self.text_result.text.intValue;
+        num = (num * 10) + 5;
+        self.text_result.text = [NSString stringWithFormat:@"%d" , num];
+    }
+}
+- (IBAction)text_num6:(id)sender {
+    if(self.text_result.text==NULL){
+        self.text_result.text = @"6";
+    }
+    else{
+        int num = self.text_result.text.intValue;
+        num = (num * 10) + 6;
+        self.text_result.text = [NSString stringWithFormat:@"%d" , num];
+    }
+}
+- (IBAction)text_num7:(id)sender {
+    if(self.text_result.text==NULL){
+        self.text_result.text = @"7";
+    }
+    else{
+        int num = self.text_result.text.intValue;
+        num = (num * 10) + 7;
+        self.text_result.text = [NSString stringWithFormat:@"%d" , num];
+    }
+}
+- (IBAction)text_num8:(id)sender {
+    if(self.text_result.text==NULL){
+        self.text_result.text = @"8";
+    }
+    else{
+        int num = self.text_result.text.intValue;
+        num = (num * 10) + 8;
+        self.text_result.text = [NSString stringWithFormat:@"%d" , num];
+    }
+}
+- (IBAction)text_num9:(id)sender {
+    if(self.text_result.text==NULL){
+        self.text_result.text = @"9";
+    }
+    else{
+        int num = self.text_result.text.intValue;
+        num = (num * 10) + 9;
+        self.text_result.text = [NSString stringWithFormat:@"%d" , num];
+    }
+}
+- (IBAction)text_num0:(id)sender {
+    if(self.text_result.text==NULL){
+        self.text_result.text = @"0";
+    }
+    else{
+        int num = self.text_result.text.intValue;
+        num = (num * 10) + 0;
+        self.text_result.text = [NSString stringWithFormat:@"%d" , num];
+    }
+}
+
+- (IBAction)text_reset:(id)sender {
+    self.text_result.text = 0;
+}
+
+
+- (IBAction)text_oper_plus:(id)sender {
+    if (self.text_result.text.intValue!=0) {
+        self.num1 = self.text_result.text.intValue;
+        self.oper = 1;
+        self.text_result.text = 0;
+    }
+}
+
+- (IBAction)text_oper_minus:(id)sender {
+    if (self.text_result.text.intValue!=0) {
+        self.num1 = self.text_result.text.intValue;
+        self.oper = 2;
+        self.text_result.text = 0;
+    }
+}
+
+- (IBAction)text_oper_multi:(id)sender {
+    if (self.text_result.text.intValue!=0) {
+        self.num1 = self.text_result.text.intValue;
+        self.oper = 3;
+        self.text_result.text = 0;
+    }
+}
+
+- (IBAction)text_oper_div:(id)sender {
+    if (self.text_result.text.intValue!=0) {
+        self.num1 = self.text_result.text.intValue;
+        self.oper = 4;
+        self.text_result.text = 0;
+    }
+}
+
+- (IBAction)text_oper_equals:(id)sender {
+    if (self.text_result.text.intValue!=0) {
+        self.num2 = self.text_result.text.intValue;
+    }
+    
+    if (self.num1!=0 && self.num2!=0 && self.oper!=0) {
+        
+        if(self.oper==1){
+            self.text_result.text = [NSString stringWithFormat:@"%d" , self.num1 + self.num2];
+        }
+        else if(self.oper==2){
+            self.text_result.text = [NSString stringWithFormat:@"%d" , self.num1 - self.num2];
+        }
+        else if(self.oper==3){
+            self.text_result.text = [NSString stringWithFormat:@"%d" , self.num1 * self.num2];
+        }
+        else if(self.oper==4){
+            self.text_result.text = [NSString stringWithFormat:@"%d" , self.num1 / self.num2];
+        }
+    }
+    
+    if (self.num2==0 && self.oper==4) {
+        self.testText.text = @"Division by 0: Retarded people don't know anything!!!";
+    }
+    
+    self.num1 = self.text_result.text.intValue;
+    self.num2 = 0;
+    self.oper = 0;
+}
+
+
 
 
 
